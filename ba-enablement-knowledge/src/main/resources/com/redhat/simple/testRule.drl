@@ -1,6 +1,6 @@
 package com.redhat.simple;
 
-rule "Hello World"
+rule "Hello World 2"
 ruleflow-group "greeting"
 dialect "mvel"
 

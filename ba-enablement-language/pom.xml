@@ -4,7 +4,7 @@
 	<groupId>com.redhat</groupId>
 	<artifactId>language</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>kjar</packaging>
 
 	<url>http://maven.apache.org</url>
 
@@ -18,5 +18,16 @@
 			<url>http://nexus-rhcbap.rhcloud.com/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.kie</groupId>
+				<artifactId>kie-maven-plugin</artifactId>
+				<version>6.2.0.Final-redhat-9</version>
+				<extensions>true</extensions>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

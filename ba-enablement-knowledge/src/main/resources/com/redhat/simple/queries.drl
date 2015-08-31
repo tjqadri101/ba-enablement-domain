@@ -1,0 +1,9 @@
+package com.redhat
+
+import com.redhat.*;
+
+query "Get Business"
+	
+	$business : Business()
+	
+end

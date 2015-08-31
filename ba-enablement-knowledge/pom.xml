@@ -41,6 +41,13 @@
 				<artifactId>kie-maven-plugin</artifactId>
 				<version>6.2.0.Final-redhat-9</version>
 				<extensions>true</extensions>
+				<dependencies>
+          <dependency>
+            <groupId>org.jbpm</groupId>
+            <artifactId>jbpm-bpmn2</artifactId>
+            <version>6.2.0.Final-redhat-9</version>
+          </dependency>
+        </dependencies>
 			</plugin>
 		</plugins>
 	</build>

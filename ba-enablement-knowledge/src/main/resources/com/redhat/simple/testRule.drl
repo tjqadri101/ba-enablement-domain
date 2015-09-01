@@ -332,3 +332,23 @@ rule "Null federalTaxId field for Business"
 		//retract($business);
 		System.out.println( "Null business federalTaxId field error");
 end
+
+rule "Enrich tax id with zip code"
+	ruleflow-group "enrich"
+	dialect "mvel"
+
+	when
+	
+		$business : Business( $taxID : federalTaxId != null, $zipCode : zipCode != null)
+
+		
+	then
+		//$responseCode = "enriched";
+		$reason = new Reason();
+		$reason.setReasonMessage("enrich tax id with zip code");
+		//insert($responseCode);
+		insert($reason);
+		//retract($business);
+		$business.setFederalTaxId($taxID + "-" + $zipCode);
+		System.out.println( "Enrich tax id with zip code");
+end

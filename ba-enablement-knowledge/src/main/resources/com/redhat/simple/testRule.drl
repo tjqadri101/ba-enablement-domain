@@ -340,13 +340,13 @@ rule "Enrich tax id with zip code"
 	
 	when
 	
-		$business : Business( $taxId : federalTaxId != null, federalTaxId != "", $zipCode : zipCode != null, zipCode != "", federalTaxId.length < 6)
+		$business : Business( federalTaxId != null, federalTaxId != "", zipCode != null, zipCode != "", federalTaxId.length < 6)
 
 		
 	then
 		modify($business){
-			
-			federalTaxId = $taxId + "-" + $zipCode;
+			federalTaxId = $business.federalTaxId + "-" + $business.zipCode;
+			//federalTaxId = federalTaxId + "-" + $zipCode;
 			
 		}
 		$reason = new Reason();

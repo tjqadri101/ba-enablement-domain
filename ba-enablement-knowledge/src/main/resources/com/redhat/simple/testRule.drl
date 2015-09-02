@@ -340,7 +340,7 @@ rule "Enrich tax id with zip code"
 	
 	when
 	
-		$business : Business( federalTaxId != null, federalTaxId != "", zipCode != null, zipCode != "", federalTaxId.length < 6)
+		$business : Business( federalTaxId != null, federalTaxId != "", ommzipCode != null, zipCode != "", federalTaxId.length < 6)
 
 		
 	then

@@ -336,19 +336,21 @@ end
 rule "Enrich tax id with zip code"
 	ruleflow-group "enrich"
 	dialect "mvel"
-
+	no-loop 
+	
 	when
 	
-		$business : Business( $taxID : federalTaxId != null, $zipCode : zipCode != null)
+		$business : Business( $taxId : federalTaxId != null, federalTaxId != "", $zipCode : zipCode != null, zipCode != "", federalTaxId.length < 6)
 
 		
 	then
-		//$responseCode = "enriched";
+		modify($business){
+			
+			federalTaxId = $taxId + "-" + $zipCode;
+			
+		}
 		$reason = new Reason();
 		$reason.setReasonMessage("enrich tax id with zip code");
-		//insert($responseCode);
 		insert($reason);
-		//retract($business);
-		$business.setFederalTaxId($taxID + "-" + $zipCode);
 		System.out.println( "Enrich tax id with zip code");
 end

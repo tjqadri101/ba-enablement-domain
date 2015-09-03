@@ -45,6 +45,7 @@ rule "Process Non-Kansas Businesses"
 		System.out.println( "Processing non-Kansas Businesses" );
 end
 
+
 rule "Empty name field for Business"
 	ruleflow-group "validate"
 	dialect "mvel"
@@ -340,7 +341,7 @@ rule "Enrich tax id with zip code"
 	
 	when
 	
-		$business : Business( federalTaxId != null, federalTaxId != "", ommzipCode != null, zipCode != "", federalTaxId.length < 6)
+		$business : Business( federalTaxId != null, federalTaxId != "", zipCode != null, zipCode != "", federalTaxId.length < 6)
 
 		
 	then

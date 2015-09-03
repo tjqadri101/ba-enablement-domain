@@ -1,4 +1,6 @@
 package com.redhat.simple;
+import com.redhat.Business;
+import com.redhat.Reason;
 
 rule "Hello World 2"
 ruleflow-group "greeting"
@@ -8,4 +10,347 @@ dialect "mvel"
 		
 	then
 		System.out.println( "hello from business central" );
+end
+
+rule "Filter Kansas Businesses"
+	ruleflow-group "filter"
+	dialect "mvel"
+
+	when
+	
+		$business : Business( stateCode == "KS")
+		
+	then
+		$responseCode = "filtered"; 
+		$reason = new Reason();
+		$reason.setReasonMessage("business from kansas");
+		insert($responseCode);
+		insert($reason);
+		retract($business);
+		System.out.println( "Filtering out Kansas Businesses" );
+end
+
+rule "Process Non-Kansas Businesses"
+	ruleflow-group "validate"
+	dialect "mvel"
+
+	when
+	
+		$business : Business( stateCode != "KS")
+		
+	then 
+		$reason = new Reason();
+		$reason.setReasonMessage("business not from kansas so applying validation rules");
+		insert($reason);
+		System.out.println( "Processing non-Kansas Businesses" );
+end
+
+rule "Empty name field for Business"
+	ruleflow-group "validate"
+	dialect "mvel"
+
+	when
+	
+		$business : Business( name == "")
+		
+	then
+		$responseCode = "validation error"; 
+		$reason = new Reason();
+		$reason.setReasonMessage("the name is empty");
+		insert($responseCode);
+		insert($reason);
+		//retract($business);
+		System.out.println( "Empty business name field error");
+end
+
+rule "Null name field for Business"
+	ruleflow-group "validate"
+	dialect "mvel"
+
+	when
+	
+		$business : Business( name == null)
+		
+	then
+		$responseCode = "validation error"; 
+		$reason = new Reason();
+		$reason.setReasonMessage("the name is null");
+		insert($responseCode);
+		insert($reason);
+		//retract($business);
+		System.out.println( "Null business name field error");
+end
+
+rule "Empty addressLine1 field for Business"
+	ruleflow-group "validate"
+	dialect "mvel"
+
+	when
+	
+		$business : Business( addressLine1 == "")
+		
+	then
+		$responseCode = "validation error"; 
+		$reason = new Reason();
+		$reason.setReasonMessage("the address line 1 is empty");
+		insert($responseCode);
+		insert($reason);
+		//retract($business);
+		System.out.println( "Empty business addressLine1 field error");
+end
+
+rule "Null addressLine1 field for Business"
+	ruleflow-group "validate"
+	dialect "mvel"
+
+	when
+	
+		$business : Business( addressLine1 == null)
+		
+	then
+		$responseCode = "validation error"; 
+		$reason = new Reason();
+		$reason.setReasonMessage("the address line 1 is null");
+		insert($responseCode);
+		insert($reason);
+		//retract($business);
+		System.out.println( "Null business addressLine1 field error");
+end
+
+rule "Empty addressLine2 field for Business"
+	ruleflow-group "validate"
+	dialect "mvel"
+
+	when
+	
+		$business : Business( addressLine2 == "")
+		
+	then
+		$responseCode = "validation error"; 
+		$reason = new Reason();
+		$reason.setReasonMessage("the address line 2 is empty");
+		insert($responseCode);
+		insert($reason);
+		//retract($business);
+		System.out.println( "Empty business addressLine2 field error");
+end
+
+rule "Null addressLine2 field for Business"
+	ruleflow-group "validate"
+	dialect "mvel"
+
+	when
+	
+		$business : Business( addressLine2 == null)
+		
+	then
+		$responseCode = "validation error"; 
+		$reason = new Reason();
+		$reason.setReasonMessage("the address line 2 is null");
+		insert($responseCode);
+		insert($reason);
+		//retract($business);
+		System.out.println( "Null business addressLine2 field error");
+end
+
+rule "Empty phoneNumber field for Business"
+	ruleflow-group "validate"
+	dialect "mvel"
+
+	when
+	
+		$business : Business( phoneNumber == "")
+		
+	then
+		$responseCode = "validation error"; 
+		$reason = new Reason();
+		$reason.setReasonMessage("the phone number is empty");
+		insert($responseCode);
+		insert($reason);
+		//retract($business);
+		System.out.println( "Empty business phoneNumber field error");
+end
+
+rule "Null phone number field for Business"
+	ruleflow-group "validate"
+	dialect "mvel"
+
+	when
+	
+		$business : Business( phoneNumber == null)
+		
+	then
+		$responseCode = "validation error"; 
+		$reason = new Reason();
+		$reason.setReasonMessage("the phone number is null");
+		insert($responseCode);
+		insert($reason);
+		//retract($business);
+		System.out.println( "Null business phoneNumber field error");
+end
+
+rule "Empty stateCode field for Business"
+	ruleflow-group "validate"
+	dialect "mvel"
+
+	when
+	
+		$business : Business( stateCode == "")
+		
+	then
+		$responseCode = "validation error"; 
+		$reason = new Reason();
+		$reason.setReasonMessage("the state code is empty");
+		insert($responseCode);
+		insert($reason);
+		//retract($business);
+		System.out.println( "Empty business stateCode field error");
+end
+
+rule "Null stateCode field for Business"
+	ruleflow-group "validate"
+	dialect "mvel"
+
+	when
+	
+		$business : Business( stateCode == null)
+		
+	then
+		$responseCode = "validation error";
+		$reason = new Reason();
+		$reason.setReasonMessage("the state code is null");
+		insert($responseCode);
+		insert($reason);
+		//retract($business);
+		System.out.println( "Null business stateCode field error");
+end
+
+rule "Empty city field for Business"
+	ruleflow-group "validate"
+	dialect "mvel"
+
+	when
+	
+		$business : Business( city == "")
+		
+	then
+		$responseCode = "validation error"; 
+		$reason = new Reason();
+		$reason.setReasonMessage("the city is empty");
+		insert($responseCode);
+		insert($reason);
+		//retract($business);
+		System.out.println( "Empty business city field error");
+end
+
+rule "Null city field for Business"
+	ruleflow-group "validate"
+	dialect "mvel"
+
+	when
+	
+		$business : Business( city == null)
+		
+	then
+		$responseCode = "validation error";
+		$reason = new Reason();
+		$reason.setReasonMessage("the city is null");
+		insert($responseCode);
+		insert($reason);
+		//retract($business);
+		System.out.println( "Null business city field error");
+end
+
+rule "Empty zipCode field for Business"
+	ruleflow-group "validate"
+	dialect "mvel"
+
+	when
+	
+		$business : Business( zipCode == "")
+		
+	then
+		$responseCode = "validation error"; 
+		$reason = new Reason();
+		$reason.setReasonMessage("the zip code is empty");
+		insert($responseCode);
+		insert($reason);
+		//retract($business);
+		System.out.println( "Empty business zipCode field error");
+end
+
+rule "Null zipCode field for Business"
+	ruleflow-group "validate"
+	dialect "mvel"
+
+	when
+	
+		$business : Business( zipCode == null)
+		
+	then
+		$responseCode = "validation error";
+		$reason = new Reason();
+		$reason.setReasonMessage("the zip code is null");
+		insert($responseCode);
+		insert($reason);
+		//retract($business);
+		System.out.println( "Null business zipCode field error");
+end
+
+rule "Empty federalTaxId field for Business"
+	ruleflow-group "validate"
+	dialect "mvel"
+
+	when
+	
+		$business : Business( federalTaxId == "")
+		
+	then
+		$responseCode = "validation error"; 
+		$reason = new Reason();
+		$reason.setReasonMessage("the federal tax id is empty");
+		insert($responseCode);
+		insert($reason);
+		//retract($business);
+		System.out.println( "Empty business federalTaxId field error");
+end
+
+rule "Null federalTaxId field for Business"
+	ruleflow-group "validate"
+	dialect "mvel"
+
+	when
+	
+		$business : Business( federalTaxId == null)
+		
+	then
+		$responseCode = "validation error";
+		$reason = new Reason();
+		$reason.setReasonMessage("the federal tax id is null");
+		insert($responseCode);
+		insert($reason);
+		//retract($business);
+		System.out.println( "Null business federalTaxId field error");
+end
+
+rule "Enrich tax id with zip code"
+	ruleflow-group "enrich"
+	dialect "mvel"
+	no-loop 
+	
+	when
+	
+		$business : Business( federalTaxId != null, federalTaxId != "", ommzipCode != null, zipCode != "", federalTaxId.length < 6)
+
+		
+	then
+		modify($business){
+			federalTaxId = $business.federalTaxId + "-" + $business.zipCode;
+			//federalTaxId = federalTaxId + "-" + $zipCode;
+			
+		}
+		$reason = new Reason();
+		$reason.setReasonMessage("enrich tax id with zip code");
+		insert($reason);
+		System.out.println( "Enrich tax id with zip code");
 end
